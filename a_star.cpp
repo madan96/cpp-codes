@@ -67,57 +67,44 @@ void dijkstra(int a[][200], int src_x, int src_y,int end_x, int end_y){
       min=9999999;
      for(int i=0;i<=199;i++){
     for(int j=0;j<=199;j++){
-           //cout<<i<<"---"<<j<<endl;
  
       if(visited[i][j]==true){
               temp.x=i;temp.y=j;
               path.push(temp);
               for(int m=1;m>=-1;m--){
                 for(int n=1;n>=-1;n--){
-                  //cout<<m<<"____"<<n;
 
                   if((temp.x+m<199 && temp.y+n<199 && temp.x+m>0 && temp.y+n>0)){
-                    if(visited[temp.x+m][temp.y+n]==false && a[temp.x+m][temp.y+n]!=0 && dist[temp.x+m][temp.y+n]==999999){
+                    if(visited[temp.x+m][temp.y+n]==false && a[temp.x+m][temp.y+n]!=0 && 
+                    dist[temp.x+m][temp.y+n]==999999){
                         cout<<count<<endl;
                         count++;
                         temp2.x = temp.x+m;
                         temp2.y = temp.y+n;
-                        //closed.push(temp2);
-                        g = dist[temp.x][temp.y]+distcost(m,n);                      //}
+                        g = dist[temp.x][temp.y]+distcost(m,n);                     
                         h = abs(end_x-temp.x-m)+abs(end_y-temp.y-n);
                         dist[temp.x+m][temp.y+n] = g + h;
-                      //else if(dist[temp.x+m][temp.x+n]>dist[temp.x][temp.y]+1.41 && checkdiagnol(m,n))
-                      //  dist[temp.x+m][temp.y+n]=dist[temp.x][temp.y]+1.41;
-                      //}
-                      //visited[temp.x+m][temp.y+n]=true;
+  
                       if(dist[temp.x+m][temp.y+n]<min && visited[temp.x+m][temp.y+n]==false){
-                        //imgpath.at<Vec3b>(temp.x+m,temp.y+n).val[0]=255;
-                            //imgpath.at<Vec3b>(temp.x+m,temp.y+n).val[1]=255;
-                            //imgpath.at<Vec3b>(temp.x+m,temp.y+n).val[2]=0;
                         min=dist[temp.x+m][temp.y+n];
                       }
                     }
                   }
                 }
               }
-              
       }
     }
   }  
-    //}
     while(!path.empty()){
          current=path.front();
          path.pop();
          
-         //cout<<current.x<<"////"<<current.y;
          for(int i=-1;i<=1;i++){
           for(int j=-1;j<=1;j++){
             if(/*visited[current.x+i][current.y+j]!=false && */dist[current.x+i][current.y+j]==min && (current.x+i<199 && current.y+j<199 && current.x+i>0 && current.y+j>0) && a[current.x+i][current.y+j]!=0){
-              
               visited[current.x+i][current.y+j]=true;
-              //cout<<i<<"+++"<<j<<endl;
-                parent[current.x+i][current.y+j].x=current.x;
-                parent[current.x+i][current.y+j].y=current.y;
+              parent[current.x+i][current.y+j].x=current.x;
+              parent[current.x+i][current.y+j].y=current.y;
             }
           }
          }
@@ -125,8 +112,7 @@ void dijkstra(int a[][200], int src_x, int src_y,int end_x, int end_y){
     } 
  
 }
-//Mat img = imread("",CV_LOAD_IMAGE_COLOR);
-//int graph[200][200];
+
 int a[200][200];
 int main(int argc, char **argv)
 {  
@@ -166,7 +152,7 @@ int main(int argc, char **argv)
   st_y = sum1_y/count1;
   end_x = sum2_x/count2;
   end_y = sum2_y/count2;
-  //cout<<st_x<<"   "<<st_y<<"  "<<end_x<<"   "<<end_y;
+
   dijkstra(a,st_x,st_y,end_x,end_y);
   printpath(parent,end_x,end_y,st_x,st_y);
   waitKey(0);
