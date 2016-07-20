@@ -56,7 +56,7 @@ void dijkstra(int graph[size1][size1], int start){
 			}
 		}
 	}
-
+	//stillPending
 	min_heap.push_back(graph_copy[start][start]);
 	
 	sort(min_heap.begin(), min_heap.end(), my_cmp);
